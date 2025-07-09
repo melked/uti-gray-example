@@ -1,7 +1,8 @@
-
 from pydantic import Field, validator
 from typing import List, Optional, Union, Literal
 from sdks.novavision.src.base.model import Package, Image, Inputs, Configs, Outputs, Response, Request, Output, Input, Config
+
+
 
 
 class InputImage(Input):
@@ -21,6 +22,7 @@ class InputImage(Input):
         title = "Image"
 
 
+
 class OutputImage(Output):
     name: Literal["outputImage"] = "outputImage"
     value: Union[List[Image],Image]
@@ -36,6 +38,9 @@ class OutputImage(Output):
 
     class Config:
         title = "Image"
+
+
+
 
 
 class KeepSideFalse(Config):
@@ -58,6 +63,13 @@ class KeepSideTrue(Config):
         title = "Enable"
 
 
+
+
+
+
+
+
+
 class KeepSideBBox(Config):
     """
         Rotate image without catting off sides.
@@ -71,18 +83,22 @@ class KeepSideBBox(Config):
         title = "Keep Sides"
 
 
+
+
+
+
 class Degree(Config):
     """
-        Positive angles specify counterclockwise rotation while negative angles indicate clockwise rotation.
+        Burası parametrenin yorumudur, Config açıklaması olarak görünür.
     """
     name: Literal["Degree"] = "Degree"
     value: int = Field(ge=-359.0, le=359.0,default=0)
     type: Literal["number"] = "number"
     field: Literal["textInput"] = "textInput"
-    placeHolder: Literal["[-359, 359]"] = "[-359, 359]"
 
     class Config:
-        title = "Angle"
+        title = "Angleeeee"
+
 
 
 class GrayInputs(Inputs):
@@ -94,13 +110,12 @@ class GrayConfigs(Configs):
     drawBBox: KeepSideBBox
 
 
-class GrayOutputs(Outputs):
-    outputImage: OutputImage
+
 
 
 class GrayRequest(Request):
-    inputs: Optional[GrayInputs]
-    configs: GrayConfigs
+    inputs: Optional[ZoomExampleExecutorInputs]
+    configs: ZoomExampleExecutorConfigs
 
     class Config:
         json_schema_extra = {
@@ -108,37 +123,43 @@ class GrayRequest(Request):
         }
 
 
+
+class GrayOutputs(Outputs):
+    outputImage: OutputImage
+
+
+
 class GrayResponse(Response):
     outputs: GrayOutputs
 
 
-class GrayExecutor(Config):
-    name: Literal["Rotation"] = "Rotation"
+class Gray(Config):
+    name: Literal["Gray"] = "Gray"
     value: Union[GrayRequest, GrayResponse]
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Rotation"
+        title = "GrayExecutor"
         json_schema_extra = {
             "target": {
                 "value": 0
             }
         }
 
-
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
-    value: Union[GrayExecutor]
+    value: Union[Gray]
     type: Literal["executor"] = "executor"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
     class Config:
         title = "Task"
+
+
         json_schema_extra = {
             "target": "value"
         }
-
 
 class PackageConfigs(Configs):
     executor: ConfigExecutor

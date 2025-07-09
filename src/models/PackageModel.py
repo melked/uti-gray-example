@@ -64,16 +64,8 @@ class KeepSideTrue(Config):
 
 
 
-
-
-
-
-
-
 class KeepSideBBox(Config):
-    """
-        Rotate image without catting off sides.
-    """
+
     name: Literal["KeepSide"] = "KeepSide"
     value: Union[KeepSideTrue, KeepSideFalse]
     type: Literal["object"] = "object"
@@ -81,9 +73,6 @@ class KeepSideBBox(Config):
 
     class Config:
         title = "Keep Sides"
-
-
-
 
 
 
@@ -114,8 +103,8 @@ class GrayConfigs(Configs):
 
 
 class GrayRequest(Request):
-    inputs: Optional[ZoomExampleExecutorInputs]
-    configs: ZoomExampleExecutorConfigs
+    inputs: Optional[GrayInputs]
+    configs: GrayConfigs
 
     class Config:
         json_schema_extra = {

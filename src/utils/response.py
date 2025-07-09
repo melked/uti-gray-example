@@ -1,6 +1,6 @@
 
 from sdks.novavision.src.helper.package import PackageHelper
-from components.Rotation.src.models.PackageModel import PackageModel, PackageConfigs, ConfigExecutor, GrayOutputs, GrayResponse, GrayExecutor, OutputImage
+from components.Gray.src.models.PackageModel import PackageModel, PackageConfigs, ConfigExecutor, GrayOutputs, GrayResponse, GrayExecutor, OutputImage
 
 
 def build_response(context):

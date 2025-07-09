@@ -99,9 +99,6 @@ class GrayConfigs(Configs):
     drawBBox: KeepSideBBox
 
 
-
-
-
 class GrayRequest(Request):
     inputs: Optional[GrayInputs]
     configs: GrayConfigs
@@ -110,7 +107,6 @@ class GrayRequest(Request):
         json_schema_extra = {
             "target": "configs"
         }
-
 
 
 class GrayOutputs(Outputs):

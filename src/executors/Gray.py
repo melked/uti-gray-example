@@ -40,6 +40,5 @@ class Gray(Component):
         packageModel = build_response(context=self)
         return packageModel
 
-
 if "__main__" == __name__:
     Executor(sys.argv[1]).run()

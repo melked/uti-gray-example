@@ -85,22 +85,22 @@ class Degree(Config):
         title = "Angle"
 
 
-class PackageInputs(Inputs):
+class GrayInputs(Inputs):
     inputImage: InputImage
 
 
-class PackageConfigs(Configs):
+class GrayConfigs(Configs):
     degree: Degree
     drawBBox: KeepSideBBox
 
 
-class PackageOutputs(Outputs):
+class GrayOutputs(Outputs):
     outputImage: OutputImage
 
 
-class PackageRequest(Request):
-    inputs: Optional[PackageInputs]
-    configs: PackageConfigs
+class GrayRequest(Request):
+    inputs: Optional[GrayInputs]
+    configs: GrayConfigs
 
     class Config:
         json_schema_extra = {
@@ -108,18 +108,18 @@ class PackageRequest(Request):
         }
 
 
-class PackageResponse(Response):
-    outputs: PackageOutputs
+class GrayResponse(Response):
+    outputs: GrayOutputs
 
 
-class PackageExecutor(Config):
-    name: Literal["Package"] = "Package"
-    value: Union[PackageRequest, PackageResponse]
+class GrayExecutor(Config):
+    name: Literal["Rotation"] = "Rotation"
+    value: Union[GrayRequest, GrayResponse]
     type: Literal["object"] = "object"
     field: Literal["option"] = "option"
 
     class Config:
-        title = "Package"
+        title = "Rotation"
         json_schema_extra = {
             "target": {
                 "value": 0
@@ -129,7 +129,7 @@ class PackageExecutor(Config):
 
 class ConfigExecutor(Config):
     name: Literal["ConfigExecutor"] = "ConfigExecutor"
-    value: Union[PackageExecutor]
+    value: Union[GrayExecutor]
     type: Literal["executor"] = "executor"
     field: Literal["dependentDropdownlist"] = "dependentDropdownlist"
 
@@ -147,4 +147,4 @@ class PackageConfigs(Configs):
 class PackageModel(Package):
     configs: PackageConfigs
     type: Literal["component"] = "component"
-    name: Literal["Package"] = "Package"
+    name: Literal["Gray"] = "Gray"
